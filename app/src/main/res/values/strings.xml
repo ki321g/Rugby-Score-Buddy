@@ -1,8 +1,14 @@
 <resources>
     <string name="app_name">Rugby Score Buddy</string>
     <string name="hint_rugbyscoreHomeTeam">Home Team</string>
+    <string name="hint_rugbyscoreHomeTeamTries">0</string>
+    <string name="hint_rugbyscoreHomeTeamConversions">0</string>
+    <string name="hint_rugbyscoreHomeTeamPenalties">0</string>
     <string name="hint_rugbyscoreAwayTeam">Away Team</string>
-    <string name="textAddTeamHeading">ENTER CLUB NAMES</string>
+    <string name="hint_rugbyscoreAwayTeamTries">0</string>
+    <string name="hint_rugbyscoreAwayTeamConversions">0</string>
+    <string name="hint_rugbyscoreAwayTeamPenalties">0</string>
+    <string name="textAddTeamHeading"> Game Details </string>
     <string name="textVersus">VS</string>">
     <string name="button_addRugbyGame">Add Game</string>
     <string name="save_RugbyGame"> Save Game </string>

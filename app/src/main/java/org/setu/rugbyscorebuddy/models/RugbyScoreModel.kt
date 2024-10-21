@@ -7,4 +7,11 @@ import kotlinx.parcelize.Parcelize
 data class RugbyScoreModel(
     var id: Long = 0,
     var homeTeam: String = "",
-    var awayTeam: String = "") : Parcelable
+    var homeTeamTries: Int = 0,
+    var homeTeamConversions: Int = 0,
+    var homeTeamPenalties: Int = 0,
+    var awayTeam: String = "",
+    var awayTeamTries: Int = 0,
+    var awayTeamConversions: Int = 0,
+    var awayTeamPenalties: Int = 0
+) : Parcelable

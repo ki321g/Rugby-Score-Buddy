@@ -33,13 +33,26 @@ class RugbyScoreActivity : AppCompatActivity() {
             edit = true
             rugbygame = intent.extras?.getParcelable("rugbygame_edit")!!
             binding.rugbyscoreHomeTeam.setText(rugbygame.homeTeam)
+            binding.textHomeTries.setText(rugbygame.homeTeamTries.toString())
+            binding.textHomeConversions.setText(rugbygame.homeTeamConversions.toString())
+            binding.textHomePenalties.setText(rugbygame.homeTeamPenalties.toString())
             binding.rugbyscoreAwayTeam.setText(rugbygame.awayTeam)
+            binding.textAwayTries.setText(rugbygame.awayTeamTries.toString())
+            binding.textAwayConversions.setText(rugbygame.awayTeamConversions.toString())
+            binding.textAwayPenalties.setText(rugbygame.awayTeamPenalties.toString())
             binding.btnAdd.setText(R.string.save_RugbyGame)
         }
 
         binding.btnAdd.setOnClickListener {
             rugbygame.homeTeam = binding.rugbyscoreHomeTeam.text.toString()
+            rugbygame.homeTeamTries = binding.textHomeTries.text.toString().toIntOrNull() ?: 0
+            rugbygame.homeTeamConversions = binding.textHomeConversions.text.toString().toIntOrNull() ?: 0
+            rugbygame.homeTeamPenalties = binding.textHomePenalties.text.toString().toIntOrNull() ?: 0
             rugbygame.awayTeam = binding.rugbyscoreAwayTeam.text.toString()
+            rugbygame.awayTeamTries = binding.textAwayTries.text.toString().toIntOrNull() ?: 0
+            rugbygame.awayTeamConversions = binding.textAwayConversions.text.toString().toIntOrNull() ?: 0
+            rugbygame.awayTeamPenalties = binding.textAwayPenalties.text.toString().toIntOrNull() ?: 0
+
             //i("homeTeam: $rugbygame.homeTeam")
             //i("awayTeam: $rugbygame.awayTeam")
 
