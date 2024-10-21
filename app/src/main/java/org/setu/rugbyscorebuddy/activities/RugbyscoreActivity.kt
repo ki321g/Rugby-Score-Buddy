@@ -4,15 +4,15 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import org.setu.rugbyscorebuddy.databinding.ActivityRugbyscoreBinding
-import org.setu.rugbyscorebuddy.models.RugbyscoreModel
+import org.setu.rugbyscorebuddy.models.RugbyScoreModel
 import timber.log.Timber
 import timber.log.Timber.i
 
 class RugbyscoreActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityRugbyscoreBinding
-    var rugbyscore = RugbyscoreModel()
-    val rugbyscores = ArrayList<RugbyscoreModel>()
+    var rugbyscore = RugbyScoreModel()
+    val rugbyscores = ArrayList<RugbyScoreModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
