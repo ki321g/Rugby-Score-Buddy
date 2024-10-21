@@ -11,6 +11,7 @@ activity = "1.9.3"
 constraintlayout = "2.1.4"
 timber = "1.5.1"
 roomKtx = "2.6.1"
+kotlinPlugin = "2.0.0-RC3"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -27,4 +28,5 @@ androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlinPlugin" }
 
