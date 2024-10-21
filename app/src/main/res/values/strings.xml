@@ -3,5 +3,8 @@
     <string name="hint_rugbyscoreHomeTeam">Home Team</string>
     <string name="hint_rugbyscoreAwayTeam">Away Team</string>
     <string name="textAddTeamHeading">ENTER CLUB NAMES</string>
+    <string name="textVersus">VS</string>">
     <string name="button_addRugbyGame">Add Game</string>
+    <string name="menu_addRugbyGame">Add</string>
+
 </resources>
