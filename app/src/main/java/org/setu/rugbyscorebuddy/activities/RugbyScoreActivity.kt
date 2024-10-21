@@ -4,15 +4,15 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import org.setu.rugbyscorebuddy.databinding.ActivityRugbyscoreBinding
-import org.setu.rugbyscorebuddy.main.MainApp
 import org.setu.rugbyscorebuddy.models.RugbyScoreModel
+import timber.log.Timber
 import timber.log.Timber.i
 
 class RugbyScoreActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityRugbyscoreBinding
-    var rugbygame = RugbyScoreModel()
-    lateinit var app: MainApp
+    var rugbyscore = RugbyScoreModel()
+    val rugbyscores = ArrayList<RugbyScoreModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,33 +20,33 @@ class RugbyScoreActivity : AppCompatActivity() {
         binding = ActivityRugbyscoreBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        app = application as MainApp
-        i("RugbyScoreBuddy Activity Started...")
+        Timber.plant(Timber.DebugTree())
+        i("Rugby Score Buddy Activity started...")
 
-        binding.btnAdd.setOnClickListener {
-            rugbygame.homeTeam = binding.rugbyscoreHomeTeam.text.toString()
-            rugbygame.awayTeam = binding.rugbyscoreAwayTeam.text.toString()
-            //i("homeTeam: $rugbygame.homeTeam")
-            //i("awayTeam: $rugbygame.awayTeam")
+        binding.btnAdd.setOnClickListener() {
+            rugbyscore.homeTeam = binding.rugbyscoreHomeTeam.text.toString()
+            rugbyscore.awayTeam = binding.rugbyscoreAwayTeam.text.toString()
+            i("homeTeam: $rugbyscore.homeTeam")
+            i("awayTeam: $rugbyscore.awayTeam")
 
-            if (rugbygame.homeTeam.isNotEmpty() && rugbygame.awayTeam.isNotEmpty()) {
-                app.rugbygames.add(rugbygame.copy())
-                i("addButton Pressed: $rugbygame")
-                for (i in app.rugbygames.indices)
-                { i("RugbyScore[$i]:${this.app.rugbygames[i]}") }
+            if (rugbyscore.homeTeam.isNotEmpty() && rugbyscore.awayTeam.isNotEmpty()) {
+                rugbyscores.add(rugbyscore.copy())
+                i("addButton Pressed: $rugbyscore")
+                for (i in rugbyscores.indices)
+                { i("RugbyScore[$i]:${this.rugbyscores[i]}") }
             }
             else {
-                if (rugbygame.homeTeam.isEmpty() && rugbygame.awayTeam.isEmpty()) {
+                if (rugbyscore.homeTeam.isEmpty() && rugbyscore.awayTeam.isEmpty()) {
                     Snackbar
                         .make(it,"Please Enter Team Name's", Snackbar.LENGTH_LONG)
                         .show()
                 }
-                else if (rugbygame.homeTeam.isEmpty()) {
+                else if (rugbyscore.homeTeam.isEmpty()) {
                     Snackbar
                         .make(it,"Please Enter a Home Team Name", Snackbar.LENGTH_LONG)
                         .show()
                 }
-                else if (rugbygame.awayTeam.isEmpty()) {
+                else if (rugbyscore.awayTeam.isEmpty()) {
                     Snackbar
                         .make(it,"Please Enter a Away Team Name", Snackbar.LENGTH_LONG)
                         .show()
