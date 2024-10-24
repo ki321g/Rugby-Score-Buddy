@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="100dp"
+    android:layout_height="60dp"
+    android:orientation="horizontal">
+
+<!--    <Button-->
+<!--        android:id="@+id/btn_less"-->
+<!--        android:layout_width="0sp"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_weight="1"-->
+<!--        android:paddingHorizontal="0sp"-->
+<!--        android:text="-" />-->
+    <Button
+        android:id="@+id/btn_less"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:paddingHorizontal="0sp"
+        android:text="-" />
+
+    <EditText
+        android:id="@+id/et_number"
+        android:layout_width="0sp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:textAlignment="center"
+        android:inputType="number"
+        android:text="0" />
+
+<!--    <Button-->
+<!--        android:id="@+id/btn_more"-->
+<!--        android:layout_width="0sp"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_weight="1"-->
+<!--        android:text="+" />-->
+    <Button
+        android:id="@+id/btn_more"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:paddingHorizontal="0sp"
+        android:text="+" />
+</LinearLayout>
