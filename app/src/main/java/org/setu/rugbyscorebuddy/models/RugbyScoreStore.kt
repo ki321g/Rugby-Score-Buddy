@@ -4,4 +4,5 @@ interface RugbyScoreStore {
     fun findAll(): List<RugbyScoreModel>
     fun create(rugbygame: RugbyScoreModel)
     fun update(rugbygame: RugbyScoreModel)
+    fun delete(rugbygame: RugbyScoreModel)
 }

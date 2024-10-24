@@ -18,6 +18,7 @@ import org.setu.rugbyscorebuddy.models.RugbyScoreModel
 class RugbyScoreListActivity : AppCompatActivity(), RugbyScoreListener {
     lateinit var app: MainApp
     private lateinit var binding: ActivityRugbyScoreListBinding
+    private var position: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,11 +31,7 @@ class RugbyScoreListActivity : AppCompatActivity(), RugbyScoreListener {
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        //binding.recyclerView.adapter = RugbyScoreAdapter(app.rugbygames)
-//        binding.recyclerView.adapter = RugbyScoreAdapter(app.rugbygames.findAll())
         binding.recyclerView.adapter = RugbyScoreAdapter(app.rugbygames.findAll(),this)
-//        binding.recyclerView.adapter
-//        RugbyScoreAdapter(app.rugbygames.findAll(),this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -58,17 +55,16 @@ class RugbyScoreListActivity : AppCompatActivity(), RugbyScoreListener {
         ) {
             if (it.resultCode == Activity.RESULT_OK) {
                 (binding.recyclerView.adapter)?.
-                //notifyItemRangeChanged(0,app.rugbygames.size)
                 notifyItemRangeChanged(0,app.rugbygames.findAll().size)
             }
         }
 
-    override fun onRugbyScoreClick(rugbygame: RugbyScoreModel) {
-        val launcherIntent = Intent(this,RugbyScoreActivity::class.java)
+    override fun onRugbyScoreClick(rugbygame: RugbyScoreModel, pos : Int) {
+        val launcherIntent = Intent(this, RugbyScoreActivity::class.java)
         launcherIntent.putExtra("rugbygame_edit", rugbygame)
+        position = pos
         getClickResult.launch(launcherIntent)
     }
-
     private val getClickResult =
         registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
@@ -76,6 +72,8 @@ class RugbyScoreListActivity : AppCompatActivity(), RugbyScoreListener {
             if (it.resultCode == Activity.RESULT_OK) {
                 (binding.recyclerView.adapter)?.
                 notifyItemRangeChanged(0,app.rugbygames.findAll().size)
-            }
+            } else // Deleting
+                if (it.resultCode == 99)
+                    (binding.recyclerView.adapter)?.notifyItemRemoved(position)
         }
 }

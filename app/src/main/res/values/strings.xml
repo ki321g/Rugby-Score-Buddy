@@ -14,6 +14,7 @@
     <string name="save_RugbyGame"> Save Game </string>
     <string name="menu_addRugbyGame">Add</string>
     <string name="menu_cancelRugbyGame">Cancel</string>
+    <string name="menu_deleteRugbyGame">Delete</string>
     <string name="enter_RugbyTeamNames"> Please Enter Team Names </string>
     <string name="enter_RugbyHomeTeamName"> Please Enter a Home Team Name </string>
     <string name="enter_RugbyAwayTeamName"> Please Enter a Away Team Name </string>
