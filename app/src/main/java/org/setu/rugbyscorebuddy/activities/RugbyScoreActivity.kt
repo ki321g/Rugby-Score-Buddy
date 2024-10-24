@@ -14,6 +14,7 @@ import org.setu.rugbyscorebuddy.databinding.ActivityRugbyscoreBinding
 import org.setu.rugbyscorebuddy.main.MainApp
 import org.setu.rugbyscorebuddy.models.RugbyScoreModel
 import org.setu.rugbyscorebuddy.R
+import org.setu.rugbyscorebuddy.helpers.HorizontalNumberPicker
 import timber.log.Timber.i
 
 class RugbyScoreActivity : AppCompatActivity() {
@@ -24,13 +25,6 @@ class RugbyScoreActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        var calcHomeScore = 0
-        var calcAwayScore = 0
-        var calcHomeTries = 0
-        var calcAwayTries = 0
-        var calcHomeConversions = 0
-        var calcAwayConversions = 0
-        var calcHomePenalties = 0
 
         binding = ActivityRugbyscoreBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -44,31 +38,50 @@ class RugbyScoreActivity : AppCompatActivity() {
         if (intent.hasExtra("rugbygame_edit")) {
             edit = true
             rugbygame = intent.extras?.getParcelable("rugbygame_edit")!!
+            // Home Team
             binding.rugbyscoreHomeTeam.setText(rugbygame.homeTeam)
-            binding.textHomeTries.setText(rugbygame.homeTeamTries.toString())
-            binding.textHomeConversions.setText(rugbygame.homeTeamConversions.toString())
-            binding.textHomePenalties.setText(rugbygame.homeTeamPenalties.toString())
+            val npHomeTries: HorizontalNumberPicker = findViewById(R.id.noHomeTries)
+            npHomeTries.setValue(rugbygame.homeTeamTries)
+            val npHomeConversions: HorizontalNumberPicker = findViewById(R.id.noHomeConversions)
+            npHomeConversions.setValue(rugbygame.homeTeamConversions)
+            val npHomePenalties: HorizontalNumberPicker = findViewById(R.id.noHomePenalties)
+            npHomePenalties.setValue(rugbygame.homeTeamPenalties)
+
+           // Away Team
             binding.rugbyscoreAwayTeam.setText(rugbygame.awayTeam)
-            binding.textAwayTries.setText(rugbygame.awayTeamTries.toString())
-            binding.textAwayConversions.setText(rugbygame.awayTeamConversions.toString())
-            binding.textAwayPenalties.setText(rugbygame.awayTeamPenalties.toString())
+            val noAwayTries: HorizontalNumberPicker = findViewById(R.id.noAwayTries)
+            noAwayTries.setValue(rugbygame.awayTeamTries)
+            val noAwayConversions: HorizontalNumberPicker = findViewById(R.id.noAwayConversions)
+            noAwayConversions.setValue(rugbygame.awayTeamConversions)
+            val noAwayPenalties: HorizontalNumberPicker = findViewById(R.id.noAwayPenalties)
+            noAwayPenalties.setValue(rugbygame.awayTeamPenalties)
+
+            // Button
             binding.btnAdd.setText(R.string.save_RugbyGame)
+
+            // Set Scores
             binding.textHomeScore.setText(calculateScore(rugbygame.homeTeamTries, rugbygame.homeTeamConversions, rugbygame.homeTeamPenalties).toString())
             binding.textAwayScore.setText(calculateScore(rugbygame.awayTeamTries, rugbygame.awayTeamConversions, rugbygame.awayTeamPenalties).toString())
         }
 
         binding.btnAdd.setOnClickListener {
+            // Home Team
             rugbygame.homeTeam = binding.rugbyscoreHomeTeam.text.toString()
-            rugbygame.homeTeamTries = binding.textHomeTries.text.toString().toIntOrNull() ?: 0
-            rugbygame.homeTeamConversions = binding.textHomeConversions.text.toString().toIntOrNull() ?: 0
-            rugbygame.homeTeamPenalties = binding.textHomePenalties.text.toString().toIntOrNull() ?: 0
-            rugbygame.awayTeam = binding.rugbyscoreAwayTeam.text.toString()
-            rugbygame.awayTeamTries = binding.textAwayTries.text.toString().toIntOrNull() ?: 0
-            rugbygame.awayTeamConversions = binding.textAwayConversions.text.toString().toIntOrNull() ?: 0
-            rugbygame.awayTeamPenalties = binding.textAwayPenalties.text.toString().toIntOrNull() ?: 0
+            val nohomeTries: HorizontalNumberPicker = findViewById(R.id.noHomeTries)
+            rugbygame.homeTeamTries = nohomeTries.getValue()
+            val npHomeConversions: HorizontalNumberPicker = findViewById(R.id.noHomeConversions)
+            rugbygame.homeTeamConversions = npHomeConversions.getValue()
+            val npHomePenalties: HorizontalNumberPicker = findViewById(R.id.noHomePenalties)
+            rugbygame.homeTeamPenalties = npHomePenalties.getValue()
 
-            //i("homeTeam: $rugbygame.homeTeam")
-            //i("awayTeam: $rugbygame.awayTeam")
+            // Away Team
+            rugbygame.awayTeam = binding.rugbyscoreAwayTeam.text.toString()
+            val noAwayTries: HorizontalNumberPicker = findViewById(R.id.noAwayTries)
+            rugbygame.awayTeamTries = noAwayTries.getValue()
+            val noAwayConversions: HorizontalNumberPicker = findViewById(R.id.noAwayConversions)
+            rugbygame.awayTeamConversions = noAwayConversions.getValue()
+            val noAwayPenalties: HorizontalNumberPicker = findViewById(R.id.noAwayPenalties)
+            rugbygame.awayTeamPenalties = noAwayPenalties.getValue()
 
             if (rugbygame.homeTeam.isNotEmpty() && rugbygame.awayTeam.isNotEmpty()) {
                 if (edit) {
@@ -100,67 +113,68 @@ class RugbyScoreActivity : AppCompatActivity() {
             }
         }
 
-        val homeTries = findViewById<EditText>(R.id.textHomeTries)
-        val homeConversions = findViewById<EditText>(R.id.textHomeConversions)
-        val homePenalties = findViewById<EditText>(R.id.textHomePenalties)
         val homeScore = findViewById<TextView>(R.id.textHomeScore)
         val awayScore = findViewById<TextView>(R.id.textAwayScore)
-        val awayTries = findViewById<EditText>(R.id.textAwayTries)
-        val awayConversions = findViewById<EditText>(R.id.textAwayConversions)
-        val awayPenalties = findViewById<EditText>(R.id.textAwayPenalties)
 
-        // Home team TextWatcher
-        homeTries.addTextChangedListener(createScoreTextWatcher(
-            homeTries, homeConversions, homePenalties, homeScore
-        ))
+        // Set up each HorizontalNumberPicker and update the corresponding value when it changes
+        val npHomeTries: HorizontalNumberPicker = findViewById(R.id.noHomeTries)
+        val npHomeConversions: HorizontalNumberPicker = findViewById(R.id.noHomeConversions)
+        val npHomePenalties: HorizontalNumberPicker = findViewById(R.id.noHomePenalties)
+        val npAwayTries: HorizontalNumberPicker = findViewById(R.id.noAwayTries)
+        val npAwayConversions: HorizontalNumberPicker = findViewById(R.id.noAwayConversions)
+        val npAwayPenalties: HorizontalNumberPicker = findViewById(R.id.noAwayPenalties)
 
-        homeConversions.addTextChangedListener(createScoreTextWatcher(
-            homeTries, homeConversions, homePenalties, homeScore
-        ))
+        // Set up the listeners for each HorizontalNumberPicker
+        // Listener for Home Team Tries
+        setupNumberPicker(npHomeTries) { newValue ->
+            setScore(npHomeTries.getValue(), npHomeConversions.getValue(), npHomePenalties.getValue(), homeScore )
+        }
 
-        homePenalties.addTextChangedListener(createScoreTextWatcher(
-            homeTries, homeConversions, homePenalties, homeScore
-        ))
+        // Listener for Home Team Conversions
+        setupNumberPicker(npHomeConversions) { newValue ->
+            setScore(npHomeTries.getValue(), npHomeConversions.getValue(), npHomePenalties.getValue(), homeScore )
+        }
 
-// Away team TextWatcher
-        awayTries.addTextChangedListener(createScoreTextWatcher(
-            awayTries, awayConversions, awayPenalties, awayScore
-        ))
+        // Listener for Home Team Penalties
+        setupNumberPicker(npHomePenalties) { newValue ->
+            setScore(npHomeTries.getValue(), npHomeConversions.getValue(), npHomePenalties.getValue(), homeScore )
+        }
 
-        awayConversions.addTextChangedListener(createScoreTextWatcher(
-            awayTries, awayConversions, awayPenalties, awayScore
-        ))
+        // Listener for Away Team Tries
+        setupNumberPicker(npAwayTries) { newValue ->
+            setScore(npAwayTries.getValue(), npAwayConversions.getValue(), npAwayPenalties.getValue(), awayScore  )
+        }
 
-        awayPenalties.addTextChangedListener(createScoreTextWatcher(
-            awayTries, awayConversions, awayPenalties, awayScore
-        ))
+        // Listener for Away Team Conversions
+        setupNumberPicker(npAwayConversions) { newValue ->
+            setScore(npAwayTries.getValue(), npAwayConversions.getValue(), npAwayPenalties.getValue(), awayScore  )
+        }
 
-
+        // Listener for Away Team Penalties
+        setupNumberPicker(npAwayPenalties) { newValue ->
+            setScore(npAwayTries.getValue(), npAwayConversions.getValue(), npAwayPenalties.getValue(), awayScore  )
+        }
     }
 
+    // Function to set the homeScore & awayScore based on the number of tries, conversions, and penalties
+    fun setScore(teamTries: Int,
+        teamConversions: Int,
+        teamPenalties: Int,
+        teamScore: TextView) {
+
+        val totalScore = (5 * teamTries) + (2 * teamConversions) + (3 * teamPenalties)
+        teamScore.setText(totalScore.toString())
+    }
+
+    // Function to calculate the score based on the number of tries, conversions, and penalties
     fun calculateScore(tries: Int, conversions: Int, penalties: Int): Int {
         return (5 * tries) + (2 * conversions) + (3 * penalties)
     }
 
-    fun createScoreTextWatcher(
-        teamTries: EditText,
-        teamConversions: EditText,
-        teamPenalties: EditText,
-        teamScore: TextView
-    ): TextWatcher {
-        return object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                val tries = teamTries.text.toString().toIntOrNull() ?: 0
-                val conversions = teamConversions.text.toString().toIntOrNull() ?: 0
-                val penalties = teamPenalties.text.toString().toIntOrNull() ?: 0
-
-                val totalScore = calculateScore(tries, conversions, penalties)
-                teamScore.setText(totalScore.toString())
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+    // Helper function to set up the HorizontalNumberPicker listener
+    fun setupNumberPicker(picker: HorizontalNumberPicker, onValueChanged: (Int) -> Unit) {
+        picker.setOnValueChangedListener { newValue ->
+            onValueChanged(newValue) // Call the onValueChanged callback
         }
     }
 
