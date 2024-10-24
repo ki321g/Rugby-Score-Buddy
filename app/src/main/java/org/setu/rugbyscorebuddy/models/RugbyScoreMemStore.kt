@@ -16,6 +16,7 @@ class RugbyScoreMemStore : RugbyScoreStore {
     }
 
     override fun create(rugbygame: RugbyScoreModel) {
+        rugbygame.id = getId()
         rugbygames.add(rugbygame)
         logAll()
     }
@@ -34,6 +35,11 @@ class RugbyScoreMemStore : RugbyScoreStore {
 
             logAll()
         }
+    }
+
+    override fun delete(rugbygame: RugbyScoreModel) {
+        rugbygames.remove(rugbygame)
+        logAll()
     }
 
     fun logAll() {

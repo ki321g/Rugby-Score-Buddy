@@ -7,7 +7,7 @@ import org.setu.rugbyscorebuddy.databinding.CardPlacemarkBinding
 import org.setu.rugbyscorebuddy.models.RugbyScoreModel
 
 interface RugbyScoreListener {
-    fun onRugbyScoreClick(rugbygame: RugbyScoreModel)
+    fun onRugbyScoreClick(rugbygame: RugbyScoreModel, position : Int)
 }
 
 class RugbyScoreAdapter constructor(private var rugbygames: List<RugbyScoreModel>,
@@ -34,7 +34,7 @@ class RugbyScoreAdapter constructor(private var rugbygames: List<RugbyScoreModel
         fun bind(rugbygame: RugbyScoreModel, listener: RugbyScoreListener) {
             binding.rugbyscoreHomeTeam.text = rugbygame.homeTeam
             binding.rugbyscoreAwayTeam.text = rugbygame.awayTeam
-            binding.root.setOnClickListener { listener.onRugbyScoreClick(rugbygame) }
+            binding.root.setOnClickListener { listener.onRugbyScoreClick(rugbygame,adapterPosition) }
         }
     }
 }

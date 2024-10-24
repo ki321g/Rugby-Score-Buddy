@@ -1,5 +1,6 @@
 package org.setu.rugbyscorebuddy.activities
 
+import android.R.id.edit
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -19,10 +20,10 @@ class RugbyScoreActivity : AppCompatActivity() {
     private lateinit var binding : ActivityRugbyscoreBinding
     var rugbygame = RugbyScoreModel()
     lateinit var app: MainApp
+    var edit = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        var edit = false
         var calcHomeScore = 0
         var calcAwayScore = 0
         var calcHomeTries = 0
@@ -30,7 +31,6 @@ class RugbyScoreActivity : AppCompatActivity() {
         var calcHomeConversions = 0
         var calcAwayConversions = 0
         var calcHomePenalties = 0
-
 
         binding = ActivityRugbyscoreBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -166,12 +166,24 @@ class RugbyScoreActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_rugby_score, menu)
+        if (edit) menu.getItem(0).isVisible = true
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        i("onOptionsItemSelected Started...")
         when (item.itemId) {
-            R.id.item_cancel -> { finish() }
+            R.id.item_delete -> {
+                i("onOptionsItemSelected: item_delete")
+                setResult(99)
+                app.rugbygames.delete(rugbygame)
+                finish()
+            }
+            R.id.item_cancel -> {
+                i("onOptionsItemSelected: item_cancel")
+                finish()
+            }
         }
         return super.onOptionsItemSelected(item)
     }
