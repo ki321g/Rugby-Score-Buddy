@@ -1,8 +1,12 @@
 package org.setu.rugbyscorebuddy.activities
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.EditText
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import org.setu.rugbyscorebuddy.databinding.ActivityRugbyscoreBinding
@@ -19,6 +23,14 @@ class RugbyScoreActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         var edit = false
+        var calcHomeScore = 0
+        var calcAwayScore = 0
+        var calcHomeTries = 0
+        var calcAwayTries = 0
+        var calcHomeConversions = 0
+        var calcAwayConversions = 0
+        var calcHomePenalties = 0
+
 
         binding = ActivityRugbyscoreBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -41,6 +53,8 @@ class RugbyScoreActivity : AppCompatActivity() {
             binding.textAwayConversions.setText(rugbygame.awayTeamConversions.toString())
             binding.textAwayPenalties.setText(rugbygame.awayTeamPenalties.toString())
             binding.btnAdd.setText(R.string.save_RugbyGame)
+            binding.textHomeScore.setText(calculateScore(rugbygame.homeTeamTries, rugbygame.homeTeamConversions, rugbygame.homeTeamPenalties).toString())
+            binding.textAwayScore.setText(calculateScore(rugbygame.awayTeamTries, rugbygame.awayTeamConversions, rugbygame.awayTeamPenalties).toString())
         }
 
         binding.btnAdd.setOnClickListener {
@@ -84,6 +98,69 @@ class RugbyScoreActivity : AppCompatActivity() {
                         .show()
                 }
             }
+        }
+
+        val homeTries = findViewById<EditText>(R.id.textHomeTries)
+        val homeConversions = findViewById<EditText>(R.id.textHomeConversions)
+        val homePenalties = findViewById<EditText>(R.id.textHomePenalties)
+        val homeScore = findViewById<TextView>(R.id.textHomeScore)
+        val awayScore = findViewById<TextView>(R.id.textAwayScore)
+        val awayTries = findViewById<EditText>(R.id.textAwayTries)
+        val awayConversions = findViewById<EditText>(R.id.textAwayConversions)
+        val awayPenalties = findViewById<EditText>(R.id.textAwayPenalties)
+
+        // Home team TextWatcher
+        homeTries.addTextChangedListener(createScoreTextWatcher(
+            homeTries, homeConversions, homePenalties, homeScore
+        ))
+
+        homeConversions.addTextChangedListener(createScoreTextWatcher(
+            homeTries, homeConversions, homePenalties, homeScore
+        ))
+
+        homePenalties.addTextChangedListener(createScoreTextWatcher(
+            homeTries, homeConversions, homePenalties, homeScore
+        ))
+
+// Away team TextWatcher
+        awayTries.addTextChangedListener(createScoreTextWatcher(
+            awayTries, awayConversions, awayPenalties, awayScore
+        ))
+
+        awayConversions.addTextChangedListener(createScoreTextWatcher(
+            awayTries, awayConversions, awayPenalties, awayScore
+        ))
+
+        awayPenalties.addTextChangedListener(createScoreTextWatcher(
+            awayTries, awayConversions, awayPenalties, awayScore
+        ))
+
+
+    }
+
+    fun calculateScore(tries: Int, conversions: Int, penalties: Int): Int {
+        return (5 * tries) + (2 * conversions) + (3 * penalties)
+    }
+
+    fun createScoreTextWatcher(
+        teamTries: EditText,
+        teamConversions: EditText,
+        teamPenalties: EditText,
+        teamScore: TextView
+    ): TextWatcher {
+        return object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                val tries = teamTries.text.toString().toIntOrNull() ?: 0
+                val conversions = teamConversions.text.toString().toIntOrNull() ?: 0
+                val penalties = teamPenalties.text.toString().toIntOrNull() ?: 0
+
+                val totalScore = calculateScore(tries, conversions, penalties)
+                teamScore.setText(totalScore.toString())
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         }
     }
 

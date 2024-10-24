@@ -153,8 +153,6 @@
 
             </LinearLayout>
 
-
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -163,7 +161,7 @@
                     android:textAlignment="center">
 
                     <TextView
-                        android:id="@+id/textHome"
+                        android:id="@+id/textScore"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -181,7 +179,8 @@
                         android:padding="10dp"
                         android:text="0"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="48sp" />
+                        android:textSize="48sp"
+                        android:inputType="number"/>
 
                     <TextView
                         android:id="@+id/textColon"
@@ -201,7 +200,8 @@
                         android:padding="10dp"
                         android:text="0"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="48sp" />
+                        android:textSize="48sp"
+                        android:inputType="number"/>
 
 
 <!--                    <TextView-->
