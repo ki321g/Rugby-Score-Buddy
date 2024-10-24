@@ -1,22 +1,20 @@
 package org.setu.rugbyscorebuddy.main
 
 import android.app.Application
+import org.setu.rugbyscorebuddy.models.RugbyScoreStore
 import org.setu.rugbyscorebuddy.models.RugbyScoreMemStore
-//import org.setu.rugbyscorebuddy.models.RugbyScoreModel
+import org.setu.rugbyscorebuddy.models.RugbyScoreJSONStore
 import timber.log.Timber
 import timber.log.Timber.i
 
 class MainApp : Application() {
 
-    //val rugbygames = ArrayList<RugbyScoreModel>()
-    val rugbygames = RugbyScoreMemStore()
+    lateinit var rugbygames: RugbyScoreStore
 
     override fun onCreate() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
+        rugbygames = RugbyScoreJSONStore(applicationContext)
         i("RugbyScoreBuddy Started...")
-//        rugbygames.add(RugbyScoreModel("Waterford City", "Tramore"))
-//        rugbygames.add(RugbyScoreModel("Clonmel", "Waterpark"))
-//        rugbygames.add(RugbyScoreModel("Carrick", "Cork Constitution"))
     }
 }
