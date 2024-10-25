@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="100dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="105dp"
     android:layout_height="60dp"
     android:orientation="horizontal">
 
@@ -11,12 +12,20 @@
 <!--        android:layout_weight="1"-->
 <!--        android:paddingHorizontal="0sp"-->
 <!--        android:text="-" />-->
-    <Button
+<!--    <Button-->
+<!--        android:id="@+id/btn_less"-->
+<!--        android:layout_width="36dp"-->
+<!--        android:layout_height="36dp"-->
+<!--        android:paddingHorizontal="0sp"-->
+<!--        android:text="-" />-->
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_less"
         android:layout_width="36dp"
         android:layout_height="36dp"
         android:paddingHorizontal="0sp"
-        android:text="-" />
+        android:textStyle="bold"
+        android:text="-"
+        app:cornerRadius="4dp" />
 
     <EditText
         android:id="@+id/et_number"
@@ -24,6 +33,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:textAlignment="center"
+        android:textSize="20sp"
         android:inputType="number"
         android:text="0" />
 
@@ -33,10 +43,18 @@
 <!--        android:layout_height="match_parent"-->
 <!--        android:layout_weight="1"-->
 <!--        android:text="+" />-->
-    <Button
+<!--    <Button-->
+<!--        android:id="@+id/btn_more"-->
+<!--        android:layout_width="36dp"-->
+<!--        android:layout_height="36dp"-->
+<!--        android:paddingHorizontal="0sp"-->
+<!--        android:text="+" />-->
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_more"
         android:layout_width="36dp"
         android:layout_height="36dp"
         android:paddingHorizontal="0sp"
-        android:text="+" />
+        android:textStyle="bold"
+        android:text="+"
+        app:cornerRadius="4dp" />
 </LinearLayout>
