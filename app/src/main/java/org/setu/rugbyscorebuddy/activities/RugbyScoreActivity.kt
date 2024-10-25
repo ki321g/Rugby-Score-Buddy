@@ -22,6 +22,7 @@ import org.setu.rugbyscorebuddy.models.RugbyScoreModel
 import org.setu.rugbyscorebuddy.R
 import org.setu.rugbyscorebuddy.helpers.HorizontalNumberPicker
 import org.setu.rugbyscorebuddy.helpers.showImagePicker
+import org.setu.rugbyscorebuddy.models.Location
 import timber.log.Timber.i
 
 class RugbyScoreActivity : AppCompatActivity() {
@@ -29,6 +30,8 @@ class RugbyScoreActivity : AppCompatActivity() {
     var rugbygame = RugbyScoreModel()
     lateinit var app: MainApp
     private lateinit var imageIntentLauncher : ActivityResultLauncher<PickVisualMediaRequest>
+    private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
+    //var location = Location(52.245696, -7.139102, 15f)
 
     var edit = false
 
@@ -84,6 +87,23 @@ class RugbyScoreActivity : AppCompatActivity() {
 
         }
 
+        // Adding Maps Code
+        binding.rugbygameLocation.setOnClickListener {
+            i("Set Location Pressed")
+            val location = Location(52.245696, -7.139102, 15f)
+            if (rugbygame.zoom != 0f) {
+                location.lat =  rugbygame.lat
+                location.lng = rugbygame.lng
+                location.zoom = rugbygame.zoom
+            }
+            val launcherIntent = Intent(this, MapActivity::class.java)
+                .putExtra("location", location)
+            mapIntentLauncher.launch(launcherIntent)
+        }
+
+        registerMapCallback()
+
+        // Adding Image code
         binding.chooseImage.setOnClickListener {
             i("Select Game Image")
             // showImagePicker(imageIntentLauncher,this)
@@ -92,6 +112,7 @@ class RugbyScoreActivity : AppCompatActivity() {
                 .build()
             imageIntentLauncher.launch(request)
         }
+
         registerImagePickerCallback()
 
         binding.btnAdd.setOnClickListener {
@@ -250,5 +271,43 @@ class RugbyScoreActivity : AppCompatActivity() {
                 e.printStackTrace()
             }
         }
+    }
+
+//    private fun registerMapCallback() {
+//        mapIntentLauncher =
+//            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+//            { result ->
+//                when (result.resultCode) {
+//                    RESULT_OK -> {
+//                        if (result.data != null) {
+//                            i("Got Location ${result.data.toString()}")
+//                            //location = result.data!!.extras?.getParcelable("location",Location::class.java)!!
+//                            location = result.data!!.extras?.getParcelable("location")!!
+//                            i("Location == $location")
+//                        } // end of if
+//                    }
+//                    RESULT_CANCELED -> { } else -> { }
+//                }
+//            }
+//    }
+
+    private fun registerMapCallback() {
+        mapIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            { result ->
+                when (result.resultCode) {
+                    RESULT_OK -> {
+                        if (result.data != null) {
+                            i("Got Location ${result.data.toString()}")
+                            val location = result.data!!.extras?.getParcelable<Location>("location")!!
+                            i("Location == $location")
+                            rugbygame.lat = location.lat
+                            rugbygame.lng = location.lng
+                            rugbygame.zoom = location.zoom
+                        } // end of if
+                    }
+                    RESULT_CANCELED -> { } else -> { }
+                }
+            }
     }
 }
