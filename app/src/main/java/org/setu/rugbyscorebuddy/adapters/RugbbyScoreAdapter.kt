@@ -3,6 +3,7 @@ package org.setu.rugbyscorebuddy.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import org.setu.rugbyscorebuddy.databinding.CardPlacemarkBinding
 import org.setu.rugbyscorebuddy.models.RugbyScoreModel
 
@@ -34,6 +35,7 @@ class RugbyScoreAdapter constructor(private var rugbygames: List<RugbyScoreModel
         fun bind(rugbygame: RugbyScoreModel, listener: RugbyScoreListener) {
             binding.rugbyscoreHomeTeam.text = rugbygame.homeTeam
             binding.rugbyscoreAwayTeam.text = rugbygame.awayTeam
+            Picasso.get().load(rugbygame.image).resize(200,200).into(binding.imageIcon)
             binding.root.setOnClickListener { listener.onRugbyScoreClick(rugbygame,adapterPosition) }
         }
     }

@@ -10,8 +10,11 @@
     <string name="hint_rugbyscoreAwayTeamPenalties">0</string>
     <string name="textAddTeamHeading"> Game Details </string>
     <string name="textVersus">VS</string>">
-    <string name="button_addRugbyGame">Add Game</string>
-    <string name="save_RugbyGame"> Save Game </string>
+    <string name="button_addRugbyGame">ADD GAME</string>
+    <string name="button_addImage">ADD IMAGE</string>
+    <string name="change_rugbygame_image">UPDATE IMAGE</string>
+    <string name="select_rugbygame_image">Select Game Image</string>
+    <string name="save_RugbyGame"> SAVE GAME</string>
     <string name="menu_addRugbyGame">Add</string>
     <string name="menu_cancelRugbyGame">Cancel</string>
     <string name="menu_deleteRugbyGame">Delete</string>
