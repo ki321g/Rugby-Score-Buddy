@@ -14,6 +14,7 @@ import com.squareup.picasso.Picasso
 import org.setu.rugbyscorebuddy.databinding.ActivityRugbyScoreMapsBinding
 import org.setu.rugbyscorebuddy.databinding.ContentRugbyScoreMapsBinding
 import org.setu.rugbyscorebuddy.main.MainApp
+import org.setu.rugbyscorebuddy.R
 
 class RugbyScoreMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
 
@@ -30,6 +31,7 @@ class RugbyScoreMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListe
         setSupportActionBar(binding.toolbar)
         app = application as MainApp
 
+        supportActionBar?.title = "Map of All Rugby Games"
         contentBinding = ContentRugbyScoreMapsBinding.bind(binding.root)
         contentBinding.mapView.onCreate(savedInstanceState)
 

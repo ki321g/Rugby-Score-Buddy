@@ -51,10 +51,13 @@
 
                 <ImageView
                     android:id="@+id/rugbygameImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_width="380dp"
+                    android:layout_height="180dp"
+                    android:maxWidth="380dp"
+                    android:maxHeight="180dp"
                     android:importantForAccessibility="no"
-                    app:srcCompat="@mipmap/ic_launcher"
+                    app:srcCompat="@mipmap/ic_rugby_score"
                     tools:ignore="ImageContrastCheck" />
 
                 <EditText
