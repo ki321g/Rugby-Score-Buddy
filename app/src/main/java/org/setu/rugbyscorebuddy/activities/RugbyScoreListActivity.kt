@@ -12,6 +12,7 @@ import org.setu.rugbyscorebuddy.databinding.ActivityRugbyScoreListBinding
 import org.setu.rugbyscorebuddy.main.MainApp
 import org.setu.rugbyscorebuddy.R
 import org.setu.rugbyscorebuddy.adapters.RugbyScoreAdapter
+import org.setu.rugbyscorebuddy.activities.RugbyScoreActivity
 import org.setu.rugbyscorebuddy.adapters.RugbyScoreListener
 import org.setu.rugbyscorebuddy.models.RugbyScoreModel
 
@@ -45,6 +46,10 @@ class RugbyScoreListActivity : AppCompatActivity(), RugbyScoreListener {
                 val launcherIntent = Intent(this, RugbyScoreActivity::class.java)
                 getResult.launch(launcherIntent)
             }
+            R.id.item_map -> {
+                val launcherIntent = Intent(this, RugbyScoreMapsActivity::class.java)
+                mapIntentLauncher.launch(launcherIntent)
+            }
         }
         return super.onOptionsItemSelected(item)
     }
@@ -76,4 +81,9 @@ class RugbyScoreListActivity : AppCompatActivity(), RugbyScoreListener {
                 if (it.resultCode == 99)
                     (binding.recyclerView.adapter)?.notifyItemRemoved(position)
         }
+
+    private val mapIntentLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        )    { }
 }

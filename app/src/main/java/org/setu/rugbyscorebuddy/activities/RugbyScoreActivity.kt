@@ -236,17 +236,13 @@ class RugbyScoreActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        i("onOptionsItemSelected Started...")
         when (item.itemId) {
             R.id.item_delete -> {
-                i("onOptionsItemSelected: item_delete")
                 setResult(99)
                 app.rugbygames.delete(rugbygame)
                 finish()
             }
             R.id.item_cancel -> {
-                i("onOptionsItemSelected: item_cancel")
                 finish()
             }
         }
@@ -272,24 +268,6 @@ class RugbyScoreActivity : AppCompatActivity() {
             }
         }
     }
-
-//    private fun registerMapCallback() {
-//        mapIntentLauncher =
-//            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
-//            { result ->
-//                when (result.resultCode) {
-//                    RESULT_OK -> {
-//                        if (result.data != null) {
-//                            i("Got Location ${result.data.toString()}")
-//                            //location = result.data!!.extras?.getParcelable("location",Location::class.java)!!
-//                            location = result.data!!.extras?.getParcelable("location")!!
-//                            i("Location == $location")
-//                        } // end of if
-//                    }
-//                    RESULT_CANCELED -> { } else -> { }
-//                }
-//            }
-//    }
 
     private fun registerMapCallback() {
         mapIntentLauncher =

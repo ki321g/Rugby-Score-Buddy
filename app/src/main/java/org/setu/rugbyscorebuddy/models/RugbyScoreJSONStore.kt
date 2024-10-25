@@ -34,6 +34,11 @@ class RugbyScoreJSONStore(private val context: Context) : RugbyScoreStore {
         return rugbygames
     }
 
+    override fun findById(id:Long) : RugbyScoreModel? {
+        val foundPlacemark: RugbyScoreModel? = rugbygames.find { it.id == id }
+        return foundPlacemark
+    }
+
     override fun create(rugbygame: RugbyScoreModel) {
         rugbygame.id = generateRandomId()
         rugbygames.add(rugbygame)
