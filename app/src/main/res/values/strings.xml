@@ -23,5 +23,12 @@
     <string name="enter_RugbyHomeTeamName"> Please Enter a Home Team Name </string>
     <string name="enter_RugbyAwayTeamName"> Please Enter a Away Team Name </string>
     <string name="title_activity_map">MapActivity</string>
+    <string name="title_activity_rugbyscore_maps">Map of All Rugby Games</string>
+    <string name="maps_description">Cick a marker to see details for that game</string>
+    <!-- Strings used for fragments for navigation -->
+<!--    <string name="first_fragment_label">First Fragment</string>-->
+<!--    <string name="second_fragment_label">Second Fragment</string>-->
+<!--    <string name="next">Next</string>-->
+<!--    <string name="previous">Previous</string>-->
 
 </resources>

@@ -15,6 +15,11 @@ class RugbyScoreMemStore : RugbyScoreStore {
         return rugbygames
     }
 
+    override fun findById(id:Long) : RugbyScoreModel? {
+        val foundRugbyGame: RugbyScoreModel? = rugbygames.find { it.id == id }
+        return foundRugbyGame
+    }
+
     override fun create(rugbygame: RugbyScoreModel) {
         rugbygame.id = getId()
         rugbygames.add(rugbygame)
