@@ -10,16 +10,18 @@
     <string name="hint_rugbyscoreAwayTeamPenalties">0</string>
     <string name="textAddTeamHeading"> Game Details </string>
     <string name="textVersus">VS</string>">
-    <string name="button_addRugbyGame">ADD GAME</string>
-    <string name="button_addImage">ADD IMAGE</string>
-    <string name="change_rugbygame_image">UPDATE IMAGE</string>
+    <string name="button_addRugbyGame">ADD\nGAME</string>
+    <string name="save_RugbyGame"> SAVE\nGAME</string>
+    <string name="button_addImage">ADD\nIMAGE</string>
+    <string name="button_location">SET\nLOCATION</string>
+    <string name="change_rugbygame_image">UPDATE\nIMAGE</string>
     <string name="select_rugbygame_image">Select Game Image</string>
-    <string name="save_RugbyGame"> SAVE GAME</string>
     <string name="menu_addRugbyGame">Add</string>
     <string name="menu_cancelRugbyGame">Cancel</string>
     <string name="menu_deleteRugbyGame">Delete</string>
     <string name="enter_RugbyTeamNames"> Please Enter Team Names </string>
     <string name="enter_RugbyHomeTeamName"> Please Enter a Home Team Name </string>
     <string name="enter_RugbyAwayTeamName"> Please Enter a Away Team Name </string>
+    <string name="title_activity_map">MapActivity</string>
 
 </resources>
