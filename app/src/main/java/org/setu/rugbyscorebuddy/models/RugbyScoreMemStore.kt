@@ -32,6 +32,7 @@ class RugbyScoreMemStore : RugbyScoreStore {
             foundRugbyGame.awayTeamTries = rugbygame.awayTeamTries
             foundRugbyGame.awayTeamConversions = rugbygame.awayTeamConversions
             foundRugbyGame.awayTeamPenalties = rugbygame.awayTeamPenalties
+            foundRugbyGame.image = rugbygame.image
 
             logAll()
         }

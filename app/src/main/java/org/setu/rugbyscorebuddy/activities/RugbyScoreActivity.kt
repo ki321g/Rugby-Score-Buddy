@@ -1,6 +1,8 @@
 package org.setu.rugbyscorebuddy.activities
 
 import android.R.id.edit
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -8,19 +10,26 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.EditText
 import android.widget.TextView
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
+import com.squareup.picasso.Picasso
 import org.setu.rugbyscorebuddy.databinding.ActivityRugbyscoreBinding
 import org.setu.rugbyscorebuddy.main.MainApp
 import org.setu.rugbyscorebuddy.models.RugbyScoreModel
 import org.setu.rugbyscorebuddy.R
 import org.setu.rugbyscorebuddy.helpers.HorizontalNumberPicker
+import org.setu.rugbyscorebuddy.helpers.showImagePicker
 import timber.log.Timber.i
 
 class RugbyScoreActivity : AppCompatActivity() {
     private lateinit var binding : ActivityRugbyscoreBinding
     var rugbygame = RugbyScoreModel()
     lateinit var app: MainApp
+    private lateinit var imageIntentLauncher : ActivityResultLauncher<PickVisualMediaRequest>
+
     var edit = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,7 +71,28 @@ class RugbyScoreActivity : AppCompatActivity() {
             // Set Scores
             binding.textHomeScore.setText(calculateScore(rugbygame.homeTeamTries, rugbygame.homeTeamConversions, rugbygame.homeTeamPenalties).toString())
             binding.textAwayScore.setText(calculateScore(rugbygame.awayTeamTries, rugbygame.awayTeamConversions, rugbygame.awayTeamPenalties).toString())
+
+            // Load Game image
+            Picasso.get()
+                .load(rugbygame.image)
+                .into(binding.rugbygameImage)
+
+            if (rugbygame.image != Uri.EMPTY) {
+                binding.chooseImage.setText(R.string.change_rugbygame_image)
+            }
+
+
         }
+
+        binding.chooseImage.setOnClickListener {
+            i("Select Game Image")
+            // showImagePicker(imageIntentLauncher,this)
+            val request = PickVisualMediaRequest.Builder()
+                .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly)
+                .build()
+            imageIntentLauncher.launch(request)
+        }
+        registerImagePickerCallback()
 
         binding.btnAdd.setOnClickListener {
             // Home Team
@@ -200,5 +230,25 @@ class RugbyScoreActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun registerImagePickerCallback() {
+        imageIntentLauncher = registerForActivityResult(
+            ActivityResultContracts.PickVisualMedia()
+        ) {
+            try{
+                contentResolver
+                    .takePersistableUriPermission(it!!,
+                        Intent.FLAG_GRANT_READ_URI_PERMISSION )
+                rugbygame.image = it // The returned Uri
+                i("IMG :: ${rugbygame.image}")
+                Picasso.get()
+                    .load(rugbygame.image)
+                    .into(binding.rugbygameImage)
+            }
+            catch(e:Exception){
+                e.printStackTrace()
+            }
+        }
     }
 }

@@ -52,6 +52,7 @@ class RugbyScoreJSONStore(private val context: Context) : RugbyScoreStore {
             foundRugbyGame.awayTeamTries = rugbygame.awayTeamTries
             foundRugbyGame.awayTeamConversions = rugbygame.awayTeamConversions
             foundRugbyGame.awayTeamPenalties = rugbygame.awayTeamPenalties
+            foundRugbyGame.image = rugbygame.image
         }
         serialize()
     }
