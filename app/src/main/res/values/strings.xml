@@ -25,5 +25,8 @@
     <string name="title_activity_map">MapActivity</string>
     <string name="title_activity_rugbyscore_maps">Map of All Rugby Games</string>
     <string name="maps_description">Cick a marker to see details for that game</string>
+    <string name="splash_text">Login or Signup to continue.</string>"
+    <string name="splash_button_login">Login</string>
+    <string name="splash_button_signup">Signup</string>"
 
 </resources>
