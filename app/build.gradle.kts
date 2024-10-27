@@ -12,7 +12,7 @@ android {
     defaultConfig {
         applicationId = "org.setu.rugbyscorebuddy"
         minSdk = 30
-        targetSdk = 35
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -54,6 +54,9 @@ dependencies {
     implementation(libs.gson)
     implementation(libs.picasso)
     implementation(libs.play.services.maps)
+    implementation("androidx.core:core-splashscreen:1.0.1")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
