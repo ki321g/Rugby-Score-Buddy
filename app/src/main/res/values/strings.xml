@@ -29,6 +29,6 @@
     <string name="splash_button_login">Login</string>
     <string name="splash_button_signup">Signup</string>
     <string name="login_text">Login to continue\nyour journey with us.</string>
-    <string name="signup_text">Fill your information below to register</string>
+    <string name="signup_text">Fill your information below to Sign Up</string>
 
 </resources>

@@ -59,6 +59,7 @@
     android:layout_marginTop="14dp"/>
 
     <com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/layoutEmail"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="20dp"
@@ -70,6 +71,7 @@
     app:boxCornerRadiusBottomEnd="10dp">
 
     <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/inputEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Email"
@@ -85,6 +87,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutPassword"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="20dp"
@@ -95,6 +98,7 @@
     app:boxCornerRadiusBottomEnd="10dp">
 
     <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/inputPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Password"
@@ -110,6 +114,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/layoutConfirmPassword"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="20dp"
@@ -120,6 +125,7 @@
     app:boxCornerRadiusBottomEnd="10dp">
 
     <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/inputConfirmPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Confirm Password"
@@ -135,16 +141,17 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="Continue"
-    android:textSize="22sp"
-    android:textColor="@color/white"
-    app:cornerRadius="12dp"
-    android:gravity="center"
-    android:layout_margin="20dp"
-    android:backgroundTint="@color/blue"
-    android:paddingVertical="10dp"/>
+        android:id="@+id/btnSignUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:backgroundTint="@color/blue"
+        android:gravity="center"
+        android:paddingVertical="10dp"
+        android:text="Sign Up"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        app:cornerRadius="12dp" />
 
     <LinearLayout
     android:id="@+id/go_login_screen"
@@ -166,7 +173,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="14sp"
-        android:textColor="@color/yellow"
+        android:textColor="@color/blue"
         android:text=" Login"/>
 
     </LinearLayout>

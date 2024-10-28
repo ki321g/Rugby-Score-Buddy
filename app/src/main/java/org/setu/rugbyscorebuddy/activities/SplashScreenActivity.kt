@@ -2,7 +2,6 @@ package org.setu.rugbyscorebuddy.activities
 
 import android.animation.ObjectAnimator
 import android.content.Intent
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
@@ -11,18 +10,17 @@ import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.doOnEnd
-import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import org.setu.rugbyscorebuddy.R
+import org.setu.rugbyscorebuddy.main.MainApp
 import org.setu.rugbyscorebuddy.models.RugbyScoreViewModel
 
 class SplashScreenActivity : AppCompatActivity() {
-    //lateinit var app: MainApp
+    lateinit var app: MainApp
     private val viewModel by viewModels<RugbyScoreViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         enableEdgeToEdge()
 
         // Working with splashScreen
