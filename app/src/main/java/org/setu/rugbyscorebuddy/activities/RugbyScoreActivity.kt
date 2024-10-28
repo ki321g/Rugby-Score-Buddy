@@ -1,14 +1,10 @@
 package org.setu.rugbyscorebuddy.activities
 
-import android.R.id.edit
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.PickVisualMediaRequest
@@ -21,17 +17,18 @@ import org.setu.rugbyscorebuddy.main.MainApp
 import org.setu.rugbyscorebuddy.models.RugbyScoreModel
 import org.setu.rugbyscorebuddy.R
 import org.setu.rugbyscorebuddy.helpers.HorizontalNumberPicker
-import org.setu.rugbyscorebuddy.helpers.showImagePicker
+import org.setu.rugbyscorebuddy.helpers.SessionManager
 import org.setu.rugbyscorebuddy.models.Location
 import timber.log.Timber.i
 
 class RugbyScoreActivity : AppCompatActivity() {
+    private lateinit var sessionManager: SessionManager
     private lateinit var binding : ActivityRugbyscoreBinding
     var rugbygame = RugbyScoreModel()
     lateinit var app: MainApp
     private lateinit var imageIntentLauncher : ActivityResultLauncher<PickVisualMediaRequest>
     private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
-    //var location = Location(52.245696, -7.139102, 15f)
+    var userId: Long = 0
 
     var edit = false
 
@@ -46,6 +43,10 @@ class RugbyScoreActivity : AppCompatActivity() {
 
         app = application as MainApp
         i("RugbyScoreBuddy Activity Started...")
+
+        // Initialize sessionManager here
+        sessionManager = SessionManager(this)
+        userId = sessionManager.getUserId()!!
 
         if (intent.hasExtra("rugbygame_edit")) {
             edit = true
@@ -133,6 +134,7 @@ class RugbyScoreActivity : AppCompatActivity() {
             rugbygame.awayTeamConversions = noAwayConversions.getValue()
             val noAwayPenalties: HorizontalNumberPicker = findViewById(R.id.noAwayPenalties)
             rugbygame.awayTeamPenalties = noAwayPenalties.getValue()
+            rugbygame.userId = userId
 
             if (rugbygame.homeTeam.isNotEmpty() && rugbygame.awayTeam.isNotEmpty()) {
                 if (edit) {

@@ -18,7 +18,8 @@ data class RugbyScoreModel(
     var image: Uri = Uri.EMPTY,
     var lat : Double = 0.0,
     var lng: Double = 0.0,
-    var zoom: Float = 0f
+    var zoom: Float = 0f,
+    var userId: Long = 0
 ) : Parcelable
 
 @Parcelize

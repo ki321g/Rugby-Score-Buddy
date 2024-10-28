@@ -18,16 +18,14 @@ class RugbyScoreViewModel(application: Application) : AndroidViewModel(applicati
     val isReady = _isReady.asStateFlow()
     val isLoggedIn = _isLoggedIn.asStateFlow()
 
-
     init {
         sessionManager = SessionManager(application.applicationContext)
         viewModelScope.launch {
             //Can check if user is authenticated here
             if (sessionManager.isLoggedIn()) {
                 // Redirect to main screen if already logged in
-//                delay(2000L)
-                _isReady.value = true
                 _isLoggedIn.value = true
+                _isReady.value = true
             } else {
                 delay(2000L)
                 _isReady.value = true

@@ -30,8 +30,8 @@ class SessionManager(context: Context) {
         return prefs.getString(KEY_USER_EMAIL, null)
     }
 
-    fun getUserId(): String? {
-        return prefs.getString(KEY_USER_ID, null)
+    fun getUserId(): Long? {
+        return prefs.getLong(KEY_USER_ID, -1)
     }
 
     fun logout() {
