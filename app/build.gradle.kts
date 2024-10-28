@@ -54,9 +54,10 @@ dependencies {
     implementation(libs.gson)
     implementation(libs.picasso)
     implementation(libs.play.services.maps)
-    implementation("androidx.core:core-splashscreen:1.0.1")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
+    implementation(libs.core.splashscreen)
+    implementation(libs.lifecycle.runtime.ktx)
+    implementation(libs.lifecycle.viewmodel.ktx)
+    implementation(libs.bcrypt)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
