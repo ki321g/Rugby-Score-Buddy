@@ -23,12 +23,6 @@ class RugbyScoreJSONStore(private val context: Context) : RugbyScoreStore {
 
     var rugbygames = mutableListOf<RugbyScoreModel>()
 
-    init {
-        if (exists(context, JSON_FILE)) {
-            deserialize()
-        }
-    }
-
     override fun findAll(): MutableList<RugbyScoreModel> {
         logAll()
         return rugbygames
@@ -43,6 +37,12 @@ class RugbyScoreJSONStore(private val context: Context) : RugbyScoreStore {
         rugbygame.id = generateRandomId()
         rugbygames.add(rugbygame)
         serialize()
+    }
+
+    init {
+        if (exists(context, JSON_FILE)) {
+            deserialize()
+        }
     }
 
     override fun update(rugbygame: RugbyScoreModel) {

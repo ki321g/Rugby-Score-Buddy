@@ -27,3 +27,11 @@ data class Location(
     var lng: Double = 0.0,
     var zoom: Float = 0f
 ) : Parcelable
+
+// New User data class
+@Parcelize
+data class UserModel(
+    var id: Long = 0,
+    var email: String = "",
+    var password: String = ""
+) : Parcelable

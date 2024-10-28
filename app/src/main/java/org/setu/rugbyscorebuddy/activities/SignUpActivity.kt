@@ -1,28 +1,31 @@
 package org.setu.rugbyscorebuddy.activities
 
-import android.R.id.input
+
 import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
-import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
-
 import org.setu.rugbyscorebuddy.R
 import org.setu.rugbyscorebuddy.databinding.ActivitySignUpBinding
 import org.setu.rugbyscorebuddy.main.MainApp
-import kotlin.toString
+import org.setu.rugbyscorebuddy.models.UserModel
+import org.setu.rugbyscorebuddy.helpers.UserAuth
+import org.setu.rugbyscorebuddy.models.UserJSONStore
 
 class SignUpActivity : AppCompatActivity() {
     lateinit var app: MainApp
+
+    var user = UserModel()
+    private lateinit var userAuth: UserAuth
     private lateinit var binding: ActivitySignUpBinding
     private lateinit var inputEmail: TextInputEditText
     private lateinit var inputPassword: TextInputEditText
     private lateinit var inputConfirmPassword: TextInputEditText
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +34,10 @@ class SignUpActivity : AppCompatActivity() {
         app = application as MainApp
         enableEdgeToEdge()
         setContentView(binding.root)
+
+        // Initialize the UserStore and UserAuth
+//    val userStore = UserJSONStore(this)
+        userAuth = UserAuth(app.users)
 
 
         inputEmail = findViewById<TextInputEditText>(R.id.inputEmail)
@@ -63,7 +70,22 @@ class SignUpActivity : AppCompatActivity() {
         } else if (confirmPassword.isEmpty() || confirmPassword != password) {
             showError(inputConfirmPassword, "Passwords do not match")
         } else {
-            Toast.makeText(this, "Sign up successful", Toast.LENGTH_SHORT).show()
+
+//            user.email = email
+//            user.password = password
+//            app.users.create(user.copy())
+//            Toast.makeText(this, "Sign up successful", Toast.LENGTH_SHORT).show()
+            // Call signUp method from UserAuth
+            val isSignupSuccessful = userAuth.signUp(email, password)
+            if (isSignupSuccessful) {
+                Toast.makeText(this, "Signup successful!", Toast.LENGTH_SHORT).show()
+                // Navigate to the next LoginActivity
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+                finish()
+            } else {
+                Toast.makeText(this, "Email already exists", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

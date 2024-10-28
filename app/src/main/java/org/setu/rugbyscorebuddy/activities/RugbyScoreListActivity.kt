@@ -12,7 +12,6 @@ import org.setu.rugbyscorebuddy.databinding.ActivityRugbyScoreListBinding
 import org.setu.rugbyscorebuddy.main.MainApp
 import org.setu.rugbyscorebuddy.R
 import org.setu.rugbyscorebuddy.adapters.RugbyScoreAdapter
-import org.setu.rugbyscorebuddy.activities.RugbyScoreActivity
 import org.setu.rugbyscorebuddy.adapters.RugbyScoreListener
 import org.setu.rugbyscorebuddy.models.RugbyScoreModel
 
