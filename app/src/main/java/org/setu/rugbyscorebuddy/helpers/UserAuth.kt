@@ -4,7 +4,7 @@ import at.favre.lib.crypto.bcrypt.BCrypt
 import org.setu.rugbyscorebuddy.models.UserModel
 import org.setu.rugbyscorebuddy.models.UserStore
 
-class UserAuth(private val userStore: UserStore) {
+class UserAuth(private val userStore: UserStore, private val sessionManager: SessionManager) {
 
     fun signUp(email: String, password: String): Boolean {
         // Hash the password before creating the UserModel
@@ -15,8 +15,14 @@ class UserAuth(private val userStore: UserStore) {
 
     fun login(email: String, password: String): Boolean {
         val user = userStore.getUser(email) ?: return false
-        // Verify the hashed password
-        return verifyPassword(password, user.password)
+        // Verify the hashed password, If the password is correct
+        // set session and return true
+        if (verifyPassword(password, user.password)) {
+            // Create a session for the logged-in user
+            sessionManager.createLoginSession(user.id, user.email)
+            return true
+        }
+        return false
     }
 
     private fun hashPassword(password: String): String {

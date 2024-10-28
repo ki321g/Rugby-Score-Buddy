@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputEditText
 import org.setu.rugbyscorebuddy.R
 import org.setu.rugbyscorebuddy.databinding.ActivityLoginBinding
+import org.setu.rugbyscorebuddy.helpers.SessionManager
 import org.setu.rugbyscorebuddy.helpers.UserAuth
 import org.setu.rugbyscorebuddy.main.MainApp
 import org.setu.rugbyscorebuddy.models.UserModel
@@ -19,6 +20,7 @@ class LoginActivity : AppCompatActivity() {
 
     var user = UserModel()
     private lateinit var userAuth: UserAuth
+    private lateinit var sessionManager: SessionManager
     private lateinit var binding: ActivityLoginBinding
     private lateinit var inputEmail: TextInputEditText
     private lateinit var inputPassword: TextInputEditText
@@ -29,7 +31,9 @@ class LoginActivity : AppCompatActivity() {
         app = application as MainApp
         enableEdgeToEdge()
         setContentView(binding.root)
-        userAuth = UserAuth(app.users)
+        // Initialize SessionManager, and UserAuth
+        sessionManager = SessionManager(this)
+        userAuth = UserAuth(app.users, sessionManager)
 
         inputEmail = findViewById<TextInputEditText>(R.id.inputEmail)
         inputPassword = findViewById<TextInputEditText>(R.id.inputPassword)

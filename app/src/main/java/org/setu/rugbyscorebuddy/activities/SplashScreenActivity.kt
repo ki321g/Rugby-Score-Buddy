@@ -57,7 +57,15 @@ class SplashScreenActivity : AppCompatActivity() {
             }
         }
 
-        setContentView(R.layout.activity_splash_screen)
+        // Check if user is already logged in
+        if (viewModel.isLoggedIn.value) {
+            // Redirect to RugbyScoreListActivity if already logged in
+            val intent = Intent(this, RugbyScoreListActivity::class.java)
+            startActivity(intent)
+            finish()
+        } else {
+            setContentView(R.layout.activity_splash_screen)
+        }
 
         supportActionBar?.hide() // Hide the ActionBar
         // Change ActionBar color

@@ -18,6 +18,7 @@
     <string name="select_rugbygame_image">Select Game Image</string>
     <string name="menu_addRugbyGame">Add</string>
     <string name="menu_cancelRugbyGame">Cancel</string>
+    <string name="menu_logoutRugbyGame">Logout</string>
     <string name="menu_deleteRugbyGame">Delete</string>
     <string name="enter_RugbyTeamNames"> Please Enter Team Names </string>
     <string name="enter_RugbyHomeTeamName"> Please Enter a Home Team Name </string>
