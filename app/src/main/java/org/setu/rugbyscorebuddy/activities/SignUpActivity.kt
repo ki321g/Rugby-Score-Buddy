@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputEditText
 import org.setu.rugbyscorebuddy.R
 import org.setu.rugbyscorebuddy.databinding.ActivitySignUpBinding
+import org.setu.rugbyscorebuddy.helpers.SessionManager
 import org.setu.rugbyscorebuddy.main.MainApp
 import org.setu.rugbyscorebuddy.models.UserModel
 import org.setu.rugbyscorebuddy.helpers.UserAuth
@@ -20,6 +21,7 @@ class SignUpActivity : AppCompatActivity() {
 
     var user = UserModel()
     private lateinit var userAuth: UserAuth
+    private lateinit var sessionManager: SessionManager
     private lateinit var binding: ActivitySignUpBinding
     private lateinit var inputEmail: TextInputEditText
     private lateinit var inputPassword: TextInputEditText
@@ -33,10 +35,9 @@ class SignUpActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(binding.root)
 
-        // Initialize the UserStore and UserAuth
-//    val userStore = UserJSONStore(this)
-        userAuth = UserAuth(app.users)
-
+        // Initialize SessionManager, and UserAuth
+        sessionManager = SessionManager(this)
+        userAuth = UserAuth(app.users, sessionManager)
 
         inputEmail = findViewById<TextInputEditText>(R.id.inputEmail)
         inputPassword = findViewById<TextInputEditText>(R.id.inputPassword)
