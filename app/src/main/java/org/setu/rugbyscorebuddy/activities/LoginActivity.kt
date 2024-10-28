@@ -3,7 +3,6 @@ package org.setu.rugbyscorebuddy.activities
 import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
-import android.view.Gravity
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -50,8 +49,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun LoginActivity.validateInputs() {
-        val email = inputEmail?.text?.toString() ?: ""
-        val password = inputPassword?.text?.toString() ?: ""
+        val email = inputEmail.text?.toString() ?: ""
+        val password = inputPassword.text?.toString() ?: ""
 
         if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             showError(inputEmail, "Please enter a valid email address")

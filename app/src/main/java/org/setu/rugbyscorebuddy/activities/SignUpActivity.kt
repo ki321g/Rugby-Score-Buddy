@@ -14,7 +14,6 @@ import org.setu.rugbyscorebuddy.databinding.ActivitySignUpBinding
 import org.setu.rugbyscorebuddy.main.MainApp
 import org.setu.rugbyscorebuddy.models.UserModel
 import org.setu.rugbyscorebuddy.helpers.UserAuth
-import org.setu.rugbyscorebuddy.models.UserJSONStore
 
 class SignUpActivity : AppCompatActivity() {
     lateinit var app: MainApp
@@ -25,7 +24,6 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var inputEmail: TextInputEditText
     private lateinit var inputPassword: TextInputEditText
     private lateinit var inputConfirmPassword: TextInputEditText
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,9 +57,9 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun SignUpActivity.validateInputs() {
-        val email = inputEmail?.text?.toString() ?: ""
-        val password = inputPassword?.text?.toString() ?: ""
-        val confirmPassword = inputConfirmPassword?.text?.toString() ?: ""
+        val email = inputEmail.text?.toString() ?: ""
+        val password = inputPassword.text?.toString() ?: ""
+        val confirmPassword = inputConfirmPassword.text?.toString() ?: ""
 
         if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             showError(inputEmail, "Please enter a valid email address")

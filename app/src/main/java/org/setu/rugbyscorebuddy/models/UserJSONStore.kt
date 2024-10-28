@@ -2,7 +2,6 @@ package org.setu.rugbyscorebuddy.models
 
 import android.content.Context
 import android.net.Uri
-import android.widget.Toast
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonDeserializationContext
@@ -44,8 +43,6 @@ class UserJSONStore(private val context: Context) : UserStore {
 
         if (users.any { it.email == user.email }) {
             return false // Email already exists
-//            Timber.i("User with email ${user.email} already exists")
-//            Toast.makeText(context, "User with email ${user.email} already exists", Toast.LENGTH_SHORT).show()
         }
 
         users.add(user)

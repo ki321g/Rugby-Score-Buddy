@@ -2,7 +2,6 @@ package org.setu.rugbyscorebuddy.main
 
 import android.app.Application
 import org.setu.rugbyscorebuddy.models.RugbyScoreStore
-import org.setu.rugbyscorebuddy.models.RugbyScoreMemStore
 import org.setu.rugbyscorebuddy.models.RugbyScoreJSONStore
 import org.setu.rugbyscorebuddy.models.UserJSONStore
 import org.setu.rugbyscorebuddy.models.UserStore
