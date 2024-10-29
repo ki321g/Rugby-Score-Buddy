@@ -65,27 +65,26 @@ class SplashScreenActivity : AppCompatActivity() {
             finish()
         } else {
             setContentView(R.layout.activity_splash_screen)
-        }
 
-        supportActionBar?.hide() // Hide the ActionBar
-        // Change ActionBar color
-//        supportActionBar?.setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(this, R.color.colorPrimaryDark)))
+            val actionBar = getActionBar();
+            actionBar?.hide();
 
-        val goToRugbyScoreLogin = findViewById<Button>(R.id.loginButton)
-        val goToRugbyScoreSignup = findViewById<Button>(R.id.signupButton)
+            val goToRugbyScoreLogin = findViewById<Button>(R.id.loginButton)
+            val goToRugbyScoreSignup = findViewById<Button>(R.id.signupButton)
 
-        goToRugbyScoreLogin.setOnClickListener {
-            // Navigate to LoginActivity
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
+            goToRugbyScoreLogin.setOnClickListener {
+                // Navigate to LoginActivity
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
 
-        goToRugbyScoreSignup.setOnClickListener {
-            // Navigate to SignupActivity
-            val intent = Intent(this, SignUpActivity::class.java)
-            startActivity(intent)
-            finish()
+            goToRugbyScoreSignup.setOnClickListener {
+                // Navigate to SignupActivity
+                val intent = Intent(this, SignUpActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
         }
     }
 }

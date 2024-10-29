@@ -23,8 +23,6 @@ class RugbyScoreJSONStore(private val context: Context) : RugbyScoreStore {
     var rugbygames = mutableListOf<RugbyScoreModel>()
 
     override fun findAll(userId: Long): MutableList<RugbyScoreModel> {
-        Timber.i("findAll() called")
-        Timber.i("userId = $userId")
         val foundRugbyGames = rugbygames.filter { it.userId == userId }.toMutableList()
         Timber.i("foundRugbyGames = $foundRugbyGames.size")
         logAll()

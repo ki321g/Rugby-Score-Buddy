@@ -37,10 +37,15 @@ class RugbyScoreListActivity : AppCompatActivity(), RugbyScoreListener {
         // Initialize SessionManager
         sessionManager = SessionManager(this)
         userId = sessionManager.getUserId()!!
-        Toast.makeText(this, "User ID: $userId", Toast.LENGTH_SHORT).show()
+//        Toast.makeText(this, "User ID: $userId", Toast.LENGTH_SHORT).show()
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
+        //binding.recyclerView.adapter = RugbyScoreAdapter(app.rugbygames.findAll(userId),this)
+    }
+
+    override fun onResume() {
+        super.onResume()
         binding.recyclerView.adapter = RugbyScoreAdapter(app.rugbygames.findAll(userId),this)
     }
 
@@ -76,9 +81,11 @@ class RugbyScoreListActivity : AppCompatActivity(), RugbyScoreListener {
         ) {
             if (it.resultCode == Activity.RESULT_OK) {
                 userId = sessionManager.getUserId()!!
-                Toast.makeText(this, "getResult - User ID: $userId", Toast.LENGTH_SHORT).show()
                 var totalGames =app.rugbygames.findAll(userId).size
-                Toast.makeText(this, "Total Games: $totalGames", Toast.LENGTH_SHORT).show()
+
+//                Toast.makeText(this, "getResult - User ID: $userId", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this, "Total Games: $totalGames", Toast.LENGTH_SHORT).show()
+
                 (binding.recyclerView.adapter)?.
                 notifyItemRangeChanged(0,totalGames)
             }
@@ -96,9 +103,11 @@ class RugbyScoreListActivity : AppCompatActivity(), RugbyScoreListener {
         ) {
             if (it.resultCode == Activity.RESULT_OK) {
                 userId = sessionManager.getUserId()!!
-                Toast.makeText(this, "getClickResult - User ID: $userId", Toast.LENGTH_SHORT).show()
                 var totalGames =app.rugbygames.findAll(userId).size
-                Toast.makeText(this, "Total Games: $totalGames", Toast.LENGTH_SHORT).show()
+
+//                Toast.makeText(this, "getClickResult - User ID: $userId", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this, "Total Games: $totalGames", Toast.LENGTH_SHORT).show()
+
                 (binding.recyclerView.adapter)?.
                 notifyItemRangeChanged(0,app.rugbygames.findAll(userId).size)
             } else // Deleting
