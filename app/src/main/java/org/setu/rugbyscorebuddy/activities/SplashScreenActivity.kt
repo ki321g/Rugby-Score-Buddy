@@ -2,7 +2,6 @@ package org.setu.rugbyscorebuddy.activities
 
 import android.animation.ObjectAnimator
 import android.content.Intent
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
@@ -11,18 +10,17 @@ import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.doOnEnd
-import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import org.setu.rugbyscorebuddy.R
+import org.setu.rugbyscorebuddy.main.MainApp
 import org.setu.rugbyscorebuddy.models.RugbyScoreViewModel
 
 class SplashScreenActivity : AppCompatActivity() {
-    //lateinit var app: MainApp
+    lateinit var app: MainApp
     private val viewModel by viewModels<RugbyScoreViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         enableEdgeToEdge()
 
         // Working with splashScreen
@@ -59,25 +57,34 @@ class SplashScreenActivity : AppCompatActivity() {
             }
         }
 
-        setContentView(R.layout.activity_splash_screen)
-
-        supportActionBar?.hide() // Hide the ActionBar
-        // Change ActionBar color
-//        supportActionBar?.setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(this, R.color.colorPrimaryDark)))
-
-        val goToRugbyscore = findViewById<Button>(R.id.loginButton)
-
-        goToRugbyscore.setOnClickListener {
-            // Navigate to LoginActivity
+        // Check if user is already logged in
+        if (viewModel.isLoggedIn.value) {
+            // Redirect to RugbyScoreListActivity if already logged in
             val intent = Intent(this, RugbyScoreListActivity::class.java)
             startActivity(intent)
             finish()
+        } else {
+            setContentView(R.layout.activity_splash_screen)
+
+            val actionBar = getActionBar();
+            actionBar?.hide();
+
+            val goToRugbyScoreLogin = findViewById<Button>(R.id.loginButton)
+            val goToRugbyScoreSignup = findViewById<Button>(R.id.signupButton)
+
+            goToRugbyScoreLogin.setOnClickListener {
+                // Navigate to LoginActivity
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+
+            goToRugbyScoreSignup.setOnClickListener {
+                // Navigate to SignupActivity
+                val intent = Intent(this, SignUpActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
         }
-
-//        signupButton.setOnClickListener {
-//            // Navigate to SignupActivity
-//            startActivity(Intent(this, SignupActivity::class.java))
-//        }
-
     }
 }

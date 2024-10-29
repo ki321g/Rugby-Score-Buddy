@@ -1,5 +1,6 @@
 package org.setu.rugbyscorebuddy.models
 
+
 import timber.log.Timber.i
 
 var lastId = 0L
@@ -11,8 +12,10 @@ internal fun getId(): Long {
 class RugbyScoreMemStore : RugbyScoreStore {
     val rugbygames = ArrayList<RugbyScoreModel>()
 
-    override fun findAll(): List<RugbyScoreModel> {
-        return rugbygames
+    override fun findAll(userId: Long): List<RugbyScoreModel> {
+        val foundRugbyGames = rugbygames.filter { it.userId == userId }.toMutableList()
+        logAll()
+        return foundRugbyGames
     }
 
     override fun findById(id:Long) : RugbyScoreModel? {

@@ -1,10 +1,8 @@
 package org.setu.rugbyscorebuddy.activities
 
-import android.R.attr.text
 import android.os.Bundle
 import android.text.Html
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
@@ -13,15 +11,16 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.squareup.picasso.Picasso
 import org.setu.rugbyscorebuddy.databinding.ActivityRugbyScoreMapsBinding
 import org.setu.rugbyscorebuddy.databinding.ContentRugbyScoreMapsBinding
+import org.setu.rugbyscorebuddy.helpers.SessionManager
 import org.setu.rugbyscorebuddy.main.MainApp
-import org.setu.rugbyscorebuddy.R
 
 class RugbyScoreMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
-
+    private lateinit var sessionManager: SessionManager
     private lateinit var binding: ActivityRugbyScoreMapsBinding
     private lateinit var contentBinding: ContentRugbyScoreMapsBinding
     lateinit var map: GoogleMap
     lateinit var app: MainApp
+    var userId: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +29,10 @@ class RugbyScoreMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListe
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
         app = application as MainApp
+
+        // Initialize SessionManager
+        sessionManager = SessionManager(this)
+        userId = sessionManager.getUserId()!!
 
         supportActionBar?.title = "Map of All Rugby Games"
         contentBinding = ContentRugbyScoreMapsBinding.bind(binding.root)
@@ -43,7 +46,7 @@ class RugbyScoreMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListe
 
     private fun configureMap() {
         map.uiSettings.isZoomControlsEnabled = true
-        app.rugbygames.findAll().forEach {
+        app.rugbygames.findAll(userId).forEach {
             val loc = LatLng(it.lat, it.lng)
             val homeScore = (it.homeTeamTries * 5) + (it.homeTeamConversions * 2 ) + (it.homeTeamPenalties * 3)
             val awayScore = (it.awayTeamTries * 5) + (it.awayTeamConversions * 2 ) + (it.awayTeamPenalties * 3)

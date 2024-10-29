@@ -18,6 +18,7 @@
     <string name="select_rugbygame_image">Select Game Image</string>
     <string name="menu_addRugbyGame">Add</string>
     <string name="menu_cancelRugbyGame">Cancel</string>
+    <string name="menu_logoutRugbyGame">Logout</string>
     <string name="menu_deleteRugbyGame">Delete</string>
     <string name="enter_RugbyTeamNames"> Please Enter Team Names </string>
     <string name="enter_RugbyHomeTeamName"> Please Enter a Home Team Name </string>
@@ -27,6 +28,8 @@
     <string name="maps_description">Cick a marker to see details for that game</string>
     <string name="splash_text">Login or Signup to continue.</string>"
     <string name="splash_button_login">Login</string>
-    <string name="splash_button_signup">Signup</string>"
+    <string name="splash_button_signup">Signup</string>
+    <string name="login_text">Login to continue\nyour journey with us.</string>
+    <string name="signup_text">Fill your information below to Sign Up</string>
 
 </resources>

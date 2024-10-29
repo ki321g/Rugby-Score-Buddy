@@ -16,6 +16,10 @@ gson = "2.11.0"
 picasso = "2.71828"
 googleAndroidLibrariesMapsplatformSecretsGradlePlugin = "2.0.1"
 playServicesMaps = "19.0.0"
+core-splashscreen = "1.0.1"
+lifecycle-runtime-ktx = "2.8.6"
+lifecycle-viewmodel-ktx = "2.8.6"
+bcrypt = "0.9.0"
 
 
 [libraries]
@@ -32,6 +36,10 @@ androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = 
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 picasso = { module = "com.squareup.picasso:picasso", version.ref = "picasso" }
 play-services-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "playServicesMaps" }
+core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "core-splashscreen" }
+lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle-runtime-ktx" }
+lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle-viewmodel-ktx" }
+bcrypt = { module = "at.favre.lib:bcrypt", version.ref = "bcrypt" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

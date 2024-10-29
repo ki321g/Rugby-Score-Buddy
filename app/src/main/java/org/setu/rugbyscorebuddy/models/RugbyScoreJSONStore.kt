@@ -20,23 +20,18 @@ fun generateRandomId(): Long {
 }
 
 class RugbyScoreJSONStore(private val context: Context) : RugbyScoreStore {
-
     var rugbygames = mutableListOf<RugbyScoreModel>()
 
-    init {
-        if (exists(context, JSON_FILE)) {
-            deserialize()
-        }
-    }
-
-    override fun findAll(): MutableList<RugbyScoreModel> {
+    override fun findAll(userId: Long): MutableList<RugbyScoreModel> {
+        val foundRugbyGames = rugbygames.filter { it.userId == userId }.toMutableList()
+        Timber.i("foundRugbyGames = $foundRugbyGames.size")
         logAll()
-        return rugbygames
+        return foundRugbyGames
     }
 
     override fun findById(id:Long) : RugbyScoreModel? {
-        val foundPlacemark: RugbyScoreModel? = rugbygames.find { it.id == id }
-        return foundPlacemark
+        val foundRugbyGame: RugbyScoreModel? = rugbygames.find { it.id == id }
+        return foundRugbyGame
     }
 
     override fun create(rugbygame: RugbyScoreModel) {
@@ -45,8 +40,15 @@ class RugbyScoreJSONStore(private val context: Context) : RugbyScoreStore {
         serialize()
     }
 
+
+    init {
+        if (exists(context, JSON_FILE)) {
+            deserialize()
+        }
+    }
+
     override fun update(rugbygame: RugbyScoreModel) {
-        val rugbygamesList = findAll() as ArrayList<RugbyScoreModel>
+        val rugbygamesList = findAll(rugbygame.userId) as ArrayList<RugbyScoreModel>
         var foundRugbyGame: RugbyScoreModel? = rugbygamesList.find { p -> p.id == rugbygame.id }
         if (foundRugbyGame != null) {
             foundRugbyGame.homeTeam = rugbygame.homeTeam
